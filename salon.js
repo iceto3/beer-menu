@@ -15,8 +15,9 @@ TABLES.forEach(t=>t.k='t');
 const ALL=[...SEATS,...TABLES],lbl=s=>(s.k=='t'?'Маса ':'Място ')+s.id;
 // каталог
 const BMAP={};(function w(x){(x.b||[]).forEach(b=>BMAP[b.n]=b);(x.k||[]).forEach(w)})(TREE);const bm=n=>BMAP[n]&&typeof dot=='function'?' '+dot(BMAP[n]):'';
-const CAT=[];const BG=[];(function w(x){if(x.b&&x.b.length)BG.push({t:'🍺 Бири · '+x.n,it:x.b.map(b=>({n:b.n,v:b.srv||'',p:null}))});(x.k||[]).forEach(w)})(TREE);
-CAT.push(...BG);
+const CAT=[];const BL=[];(function w(x){(x.b||[]).forEach(b=>BL.push({n:b.n,v:b.srv||'',p:null,st:x.n}));(x.k||[]).forEach(w)})(TREE);
+BL.sort((a,b)=>parseInt(a.n)-parseInt(b.n));
+CAT.push({t:'🍺 Наливни',it:BL.filter(b=>parseInt(b.n)<=4)},{t:'🍾 Бутилирани',it:BL.filter(b=>parseInt(b.n)>=5)});
 SP.forEach(s=>CAT.push({t:s.ic+' '+s.t,it:s.it.flatMap(x=>{const vol=s.vol||'';if(!x.p)return[{n:x.n,v:vol,p:null}];
  return x.p.split('/').map(t=>t.trim()).map(t=>{const m=t.match(/^(\d+)\s*[×x]\s*([\d.]+)$/);return m?{n:x.n,v:m[1]+' бр.',p:+m[2]}:{n:x.n,v:vol,p:isNaN(+t)?null:+t}})})}));
 // съхранение
@@ -71,8 +72,8 @@ function picker(id){const s=ALL.find(x=>x.id==id);
  const pl=cd.querySelector('#pl'),q=cd.querySelector('#q');
  const qty=it=>{const l=(O[id]||{items:[]}).items.find(l=>l.n==it.n&&l.v==it.v&&l.p==it.p);return l?l.q:0};
  function render(){const f=q.value.trim().toLowerCase();let k=0;
-  pl.innerHTML=CAT.map((g,gi)=>{const its=g.it.map((it,ii)=>[it,ii]).filter(([it])=>!f||it.n.toLowerCase().includes(f)||g.t.toLowerCase().includes(f));if(!its.length)return'';
-   return `<h3>${e(g.t)}</h3>`+its.map(([it,ii])=>{const n=qty(it);return `<div class="pi"><div class="ln">${e(it.n)}${bm(it.n)}<small style="display:block;color:#bfae92">${e(it.v)}</small></div><span class="pr">${fm(it.p)}</span>${n?`<button class="qb" data-g="${gi}" data-i="${ii}" data-a="-">−</button><span class="qn">${n}</span><button class="qb" data-g="${gi}" data-i="${ii}" data-a="+">+</button>`:`<button class="ad" data-g="${gi}" data-i="${ii}" data-a="+">＋</button>`}</div>`}).join('')}).join('')||'<p>Няма резултати.</p>';
+  pl.innerHTML=CAT.map((g,gi)=>{const its=g.it.map((it,ii)=>[it,ii]).filter(([it])=>!f||it.n.toLowerCase().includes(f)||(it.st||'').toLowerCase().includes(f)||g.t.toLowerCase().includes(f));if(!its.length)return'';
+   return `<h3>${e(g.t)}</h3>`+its.map(([it,ii])=>{const n=qty(it);return `<div class="pi"><div class="ln">${e(it.n)}${bm(it.n)}<small style="display:block;color:#bfae92">${it.st?`<span style="color:#9a9a9a">${e(it.st)}</span> · `:''}${e(it.v)}</small></div><span class="pr">${fm(it.p)}</span>${n?`<button class="qb" data-g="${gi}" data-i="${ii}" data-a="-">−</button><span class="qn">${n}</span><button class="qb" data-g="${gi}" data-i="${ii}" data-a="+">+</button>`:`<button class="ad" data-g="${gi}" data-i="${ii}" data-a="+">＋</button>`}</div>`}).join('')}).join('')||'<p>Няма резултати.</p>';
   pl.querySelectorAll('button').forEach(b=>b.onclick=()=>{const it=CAT[b.dataset.g].it[b.dataset.i];
    if(b.dataset.a=='+')add(id,it);else{const o=O[id],l=o.items.find(l=>l.n==it.n&&l.v==it.v&&l.p==it.p);if(--l.q<1)o.items.splice(o.items.indexOf(l),1);if(!o.items.length)delete O[id];save()}render()})}
  q.oninput=render;render();cd.querySelector('#dn').onclick=()=>panel(id);cd.hidden=false}
