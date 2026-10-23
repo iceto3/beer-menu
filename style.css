@@ -41,3 +41,6 @@ details{font-size:.85em;margin-top:4px}summary{cursor:pointer;font:700 1em Oswal
 main{padding-bottom:20px}
 
 #hm{max-height:calc(100vh - 70px);overflow-y:auto}#hm a{padding:10px 16px;font-size:.98em}.nh{padding:8px 16px 4px;font:700 .75em Oswald,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#9aa3ab;background:#0e0c0b;border-bottom:1px solid #2e2724}
+.rec{margin:12px 0;border:1px solid #aeb6bd;border-radius:10px;background:var(--grain),#1d1916;padding:4px 12px;font-size:1em}.rec summary{padding:10px 0;font-size:1.1em}
+.rec table{width:100%;border-collapse:collapse}.rec td{padding:7px 4px;border-bottom:1px solid #3a302a}.rec td+td{text-align:right;color:var(--amber);font-family:Oswald,sans-serif;white-space:nowrap}
+.rec ol{padding-left:22px;line-height:1.5}.rec li::marker{color:var(--ember);font-family:Oswald,sans-serif}
