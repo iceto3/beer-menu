@@ -14,6 +14,7 @@ const TABLES=[{id:'7',x:357,y:455,w:68,h:35,ch:[[364,446,'h'],[392,446,'h'],[364
 TABLES.forEach(t=>t.k='t');
 const ALL=[...SEATS,...TABLES],lbl=s=>(s.k=='t'?'Маса ':'Място ')+s.id;
 // каталог
+const BMAP={};(function w(x){(x.b||[]).forEach(b=>BMAP[b.n]=b);(x.k||[]).forEach(w)})(TREE);const bm=n=>BMAP[n]&&typeof dot=='function'?' '+dot(BMAP[n]):'';
 const CAT=[];const BG=[];(function w(x){if(x.b&&x.b.length)BG.push({t:'🍺 Бири · '+x.n,it:x.b.map(b=>({n:b.n,v:b.srv||'',p:null}))});(x.k||[]).forEach(w)})(TREE);
 CAT.push(...BG);
 SP.forEach(s=>CAT.push({t:s.ic+' '+s.t,it:s.it.flatMap(x=>{const vol=s.vol||'';if(!x.p)return[{n:x.n,v:vol,p:null}];
@@ -52,7 +53,7 @@ cd.onclick=ev=>{if(ev.target===cd)close()};
 const toast=t=>{const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.append(d);setTimeout(()=>d.remove(),1800)};
 function panel(id){const s=ALL.find(x=>x.id==id),o=O[id]||{items:[]},t=tot(o);
  cd.innerHTML=`<div class="c"><h2>${lbl(s)}</h2>${o.opened&&o.items.length?`<small>Отворена в ${tm(o.opened)}</small>`:''}
- <ul class="ol">${o.items.map((l,i)=>`<li><div class="ln">${e(l.n)}<small>${e(l.v)}${l.v?' · ':''}${fm(l.p)} · ${tm(l.ts)}</small></div><button class="qb" data-a="-" data-i="${i}">−</button><span class="qn">${l.q}</span><button class="qb" data-a="+" data-i="${i}">+</button><span class="lt">${l.p==null?'—':fm(l.p*l.q)}</span><button class="rm" data-a="x" data-i="${i}" aria-label="Премахни">✕</button></li>`).join('')||'<li>Няма артикули.</li>'}</ul>
+ <ul class="ol">${o.items.map((l,i)=>`<li><div class="ln">${e(l.n)}${bm(l.n)}<small>${e(l.v)}${l.v?' · ':''}${fm(l.p)} · ${tm(l.ts)}</small></div><button class="qb" data-a="-" data-i="${i}">−</button><span class="qn">${l.q}</span><button class="qb" data-a="+" data-i="${i}">+</button><span class="lt">${l.p==null?'—':fm(l.p*l.q)}</span><button class="rm" data-a="x" data-i="${i}" aria-label="Премахни">✕</button></li>`).join('')||'<li>Няма артикули.</li>'}</ul>
  <div class="tot">Общо: ${tstr(o)}</div>${t.u&&o.items.length?'<p class="cav">Някои артикули нямат цена в менюто (—) и не са включени.</p>':''}
  <div class="acts"><button data-a="add" class="pay">＋ Добави</button>${o.items.length?`<button data-a="pay" class="pay">Приключи / Плати</button><button data-a="clr">Изчисти</button><button data-a="mv">Премести</button>`:''}<button data-a="cl">Затвори</button></div></div>`;
  cd.hidden=false;
@@ -71,7 +72,7 @@ function picker(id){const s=ALL.find(x=>x.id==id);
  const qty=it=>{const l=(O[id]||{items:[]}).items.find(l=>l.n==it.n&&l.v==it.v&&l.p==it.p);return l?l.q:0};
  function render(){const f=q.value.trim().toLowerCase();let k=0;
   pl.innerHTML=CAT.map((g,gi)=>{const its=g.it.map((it,ii)=>[it,ii]).filter(([it])=>!f||it.n.toLowerCase().includes(f)||g.t.toLowerCase().includes(f));if(!its.length)return'';
-   return `<h3>${e(g.t)}</h3>`+its.map(([it,ii])=>{const n=qty(it);return `<div class="pi"><div class="ln">${e(it.n)}<small style="display:block;color:#bfae92">${e(it.v)}</small></div><span class="pr">${fm(it.p)}</span>${n?`<button class="qb" data-g="${gi}" data-i="${ii}" data-a="-">−</button><span class="qn">${n}</span><button class="qb" data-g="${gi}" data-i="${ii}" data-a="+">+</button>`:`<button class="ad" data-g="${gi}" data-i="${ii}" data-a="+">＋</button>`}</div>`}).join('')}).join('')||'<p>Няма резултати.</p>';
+   return `<h3>${e(g.t)}</h3>`+its.map(([it,ii])=>{const n=qty(it);return `<div class="pi"><div class="ln">${e(it.n)}${bm(it.n)}<small style="display:block;color:#bfae92">${e(it.v)}</small></div><span class="pr">${fm(it.p)}</span>${n?`<button class="qb" data-g="${gi}" data-i="${ii}" data-a="-">−</button><span class="qn">${n}</span><button class="qb" data-g="${gi}" data-i="${ii}" data-a="+">+</button>`:`<button class="ad" data-g="${gi}" data-i="${ii}" data-a="+">＋</button>`}</div>`}).join('')}).join('')||'<p>Няма резултати.</p>';
   pl.querySelectorAll('button').forEach(b=>b.onclick=()=>{const it=CAT[b.dataset.g].it[b.dataset.i];
    if(b.dataset.a=='+')add(id,it);else{const o=O[id],l=o.items.find(l=>l.n==it.n&&l.v==it.v&&l.p==it.p);if(--l.q<1)o.items.splice(o.items.indexOf(l),1);if(!o.items.length)delete O[id];save()}render()})}
  q.oninput=render;render();cd.querySelector('#dn').onclick=()=>panel(id);cd.hidden=false}
