@@ -14,9 +14,8 @@ const TABLES=[{id:'7',x:357,y:455,w:68,h:35,ch:[[364,446,'h'],[392,446,'h'],[364
 TABLES.forEach(t=>t.k='t');
 const ALL=[...SEATS,...TABLES],lbl=s=>(s.k=='t'?'Маса ':'Място ')+s.id;
 // каталог
-const CAT=[];const beers=[];(function w(x){(x.b||[]).forEach(b=>beers.push(b));(x.k||[]).forEach(w)})(TREE);
-beers.sort((a,b)=>(parseInt(a.n)||999)-(parseInt(b.n)||999));
-CAT.push({t:'🍺 Бири',it:beers.map(b=>({n:b.n,v:b.srv||'',p:null}))});
+const CAT=[];const BG=[];(function w(x){if(x.b&&x.b.length)BG.push({t:'🍺 Бири · '+x.n,it:x.b.map(b=>({n:b.n,v:b.srv||'',p:null}))});(x.k||[]).forEach(w)})(TREE);
+CAT.push(...BG);
 SP.forEach(s=>CAT.push({t:s.ic+' '+s.t,it:s.it.flatMap(x=>{const vol=s.vol||'';if(!x.p)return[{n:x.n,v:vol,p:null}];
  return x.p.split('/').map(t=>t.trim()).map(t=>{const m=t.match(/^(\d+)\s*[×x]\s*([\d.]+)$/);return m?{n:x.n,v:m[1]+' бр.',p:+m[2]}:{n:x.n,v:vol,p:isNaN(+t)?null:+t}})})}));
 // съхранение
