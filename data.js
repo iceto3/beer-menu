@@ -44,3 +44,7 @@ const HERB='<svg class="clove" viewBox="0 0 20 20" width="1em" height="1em" aria
 const flh=s=>(s||'').split('{c}').join(CLOVE).split('{g}').join(GRASS).split('{h}').join(HERB);
 (function f(x,p){x.path=[...p,x.n];(x.b||[]).forEach(b=>b.path=x.path);(x.k||[]).forEach(k=>f(k,x.path))})(TREE,[]);
 const crumb=p=>`<div class="crumb">${p.map(s=>s.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))).join(' › ')}</div>`;
+const IMGS=[1,2,3,4,6,7,8,9,10,11,13,14,15,16,17];
+const bno=b=>parseInt(b.n);
+const bsrc=(b,t)=>IMGS.includes(bno(b))?`images/${String(bno(b)).padStart(2,'0')}${t?'-t':''}.jpg`:'images/glass.svg';
+const bimg=b=>`<div class="bimg"><img src="${bsrc(b)}" alt="${b.n.replace(/"/g,'')}" loading="lazy" decoding="async"></div>`;
