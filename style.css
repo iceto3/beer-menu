@@ -62,7 +62,7 @@ main{padding-bottom:20px}
 #pwo{background:linear-gradient(180deg,#f2c27a,#d9963f);color:#2a1a0c;border:1px solid #7a4a1c}
 body.locked>*:not(#pwm){visibility:hidden}
 #lockb{position:fixed;left:8px;bottom:8px;z-index:9;padding:6px 10px;font-size:.85em;border-radius:8px;opacity:.85}
-body[data-s=shots]{background:repeating-linear-gradient(35deg,#1f4a3a 0 46px,#d9c7a8 46px 92px);background-attachment:fixed}
+body[data-s=shots]{background:repeating-linear-gradient(-35deg,rgba(25,70,52,.86) 0 46px,rgba(232,212,176,.42) 46px 92px),url(images/wood.jpg) 0 0/384px 384px;background-attachment:fixed}
 body[data-s=shots] .mrow{background:rgba(16,22,18,.9)!important;border-color:#c8a86a!important;box-shadow:0 4px 12px #000b!important;backdrop-filter:blur(2px)}
 body[data-s=shots] .mrow .mn{color:#ffd58a!important;text-shadow:none}body[data-s=shots] .mrow .crumb{color:#d9c7a8!important}
 body[data-s=shots] .sec,body[data-s=shots] .lgw{background:rgba(16,22,18,.88);border-radius:8px;box-shadow:0 2px 8px #000a}
