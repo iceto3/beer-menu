@@ -33,3 +33,6 @@ const BIT={"Krombacher Pils":[23,'y'],"Weihenstephaner Hefeweissbier":[14,'g'],"
 (function f(x){(x.b||[]).forEach(b=>{const k=b.n.replace(/^\d+\. /,'');[b.ibu,b.bit]=BIT[k]});(x.k||[]).forEach(f)})(TREE);
 const BITN={g:'ниска',y:'средна',r:'висока'},BITC={g:'#2e9e3e',y:'#e8c21a',r:'#d0342c'};
 const dot=b=>`<span class="dot ${b.bit}" title="горчивина: ${BITN[b.bit]}"></span>`;
+const FL={"Weihenstephaner Hefeweissbier":"🍌🧂🍞","O'Hara's Irish Stout":"☕","O'Hara's 51st State IPA":"🍍🍊🍑🍋","Carlsberg":"🍋🌸","Britos Hoppy Blond":"🍊🌸🌿","Schöfferhofer Hefeweizen":"🍌🧂🍞","Glarus Premium Pale Ale":"🍋","Leffe Brune":"🍮☕","Sierra Nevada Pale Ale":"🌲🍋🍮","Ichnusa":"🍞","Corona Extra":"🍑🍊"};
+(function f(x){(x.b||[]).forEach(b=>{b.fl=FL[b.n.replace(/^\d+\. /,'')]||''});(x.k||[]).forEach(f)})(TREE);
+const FLEG="🍊 портокал/мандарина · 🍋 лимон/цитрус · 🍌 банан · 🍐 круша · 🍏 ябълка · 🍑 костилкови · 🍍 тропически · 🍇 сушени плодове · ☕ кафе/печено · 🍫 шоколад · 🍞 хляб/малц · 🍯 мед · 🍮 карамел · 🌲 бор · 🌸 цветя · 🌿 билки/трева · 🧂 карамфил/подправки";

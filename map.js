@@ -1,4 +1,4 @@
-const NS='http://www.w3.org/2000/svg',W=150,H=40,GX=14,GY=70,vp=document.getElementById('vp'),svg=document.getElementById('svg');
+const NS='http://www.w3.org/2000/svg',W=150,H=40,GX=14,GY=80,vp=document.getElementById('vp'),svg=document.getElementById('svg');
 const has=x=>(x.b&&x.b.length)||(x.k&&x.k.some(has));
 function build(x,st){const kids=[...(x.k||[]).map(k=>build(k,k.n)),...(x.b||[]).map(b=>({beer:b,st:x.n,label:b.n,c:[]}))];
  return {label:x.n,d:x.d,empty:!has(x),c:kids}}
@@ -10,10 +10,10 @@ function lines(s){const w=s.split(' '),o=[''];w.forEach(x=>{if((o[o.length-1]+' 
 function draw(n){n.c.forEach(c=>{const my=n.y+H+GY/2;el('path',{d:`M${n.x+W/2},${n.y+H} V${my} H${c.x+W/2} V${c.y}`});draw(c)});
  const g=el('g',{class:'nd'+(n.beer?' b':'')+(n.beer&&n.beer.srv.startsWith('Наливна')?' d':'')+(n.empty&&!n.beer?' e':'')+(n.root?' r':''),transform:`translate(${n.x},${n.y})`});
  el('rect',{width:W,height:H,rx:8},g);const L=lines(n.label);L.forEach((t,i)=>{el('text',{x:W/2,y:H/2+(i-(L.length-1)/2)*15+4,'text-anchor':'middle'},g).textContent=t});
- if(n.beer)el('circle',{cx:W-8,cy:8,r:5,fill:BITC[n.beer.bit],stroke:'#1d1a16','stroke-width':1},g);g.dataset.id=all.push(n)-1}
+ if(n.beer&&n.beer.fl)el('text',{x:W/2,y:H+13,'text-anchor':'middle',style:'font-size:12px'},g).textContent=n.beer.fl;if(n.beer)el('circle',{cx:W-8,cy:8,r:5,fill:BITC[n.beer.bit],stroke:'#1d1a16','stroke-width':1},g);g.dataset.id=all.push(n)-1}
 const all=[];draw(root);
 const e=s=>s.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])),cd=document.getElementById('card');
-function show(n){if(n.beer){const b=n.beer;cd.innerHTML=`<div class="c"><h2>${e(b.n)}</h2><p><b>Държава:</b> ${e(b.c)}<br><b>Стил:</b> ${e(n.st)}<br><b>Алкохол:</b> ${b.abv?e(b.abv):'—'}<br><b>Горчивина:</b> ${dot(b)} ${BITN[b.bit]}${b.ibu?' ('+e(String(b.ibu))+' IBU)':''}<br><b>Сервиране:</b> ${e(b.srv)}</p><p>${e(b.notes)}</p>${b.cav?`<p class="cav">⚠️ ${e(b.cav)}</p>`:''}<button>Затвори</button></div>`}
+function show(n){if(n.beer){const b=n.beer;cd.innerHTML=`<div class="c"><h2>${e(b.n)} ${dot(b)} ${b.fl}</h2><p><b>Държава:</b> ${e(b.c)}<br><b>Стил:</b> ${e(n.st)}<br><b>Алкохол:</b> ${b.abv?e(b.abv):'—'}<br><b>Горчивина:</b> ${dot(b)} ${BITN[b.bit]}${b.ibu?' ('+e(String(b.ibu))+' IBU)':''}<br><b>Сервиране:</b> ${e(b.srv)}</p><p>${e(b.notes)}</p>${b.cav?`<p class="cav">⚠️ ${e(b.cav)}</p>`:''}<button>Затвори</button></div>`}
  else cd.innerHTML=`<div class="c"><h2>${e(n.label)}</h2><p>${e(n.d||'')}</p>${n.empty?'<p><i>Все още няма бира от този стил в менюто.</i></p>':''}<button>Затвори</button></div>`;
  cd.hidden=false;cd.querySelector('button').onclick=()=>cd.hidden=true}
 cd.onclick=ev=>{if(ev.target===cd)cd.hidden=true};
@@ -34,4 +34,4 @@ const up=ev=>{const was=P.size;P.delete(ev.pointerId);if(P.size<2)pd=0;if(was!=1
  if(g){const n=all[g.dataset.id];setTimeout(()=>{if(lastTap===now)show(n)},300)}};
 svg.addEventListener('pointerup',up);svg.addEventListener('pointercancel',ev=>{P.delete(ev.pointerId);pd=0});
 svg.addEventListener('dblclick',ev=>ev.preventDefault());document.addEventListener('gesturestart',ev=>ev.preventDefault());
-document.getElementById('lgm').outerHTML=LEGEND;
+document.getElementById('lgm').outerHTML=LEGEND;const fd=document.createElement('details');fd.id='fleg';fd.innerHTML='<summary>Вкусове</summary>'+FLEG;document.body.append(fd);
