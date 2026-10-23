@@ -46,5 +46,6 @@ const flh=s=>(s||'').split('{c}').join(CLOVE).split('{g}').join(GRASS).split('{h
 const crumb=p=>`<div class="crumb">${p.map(s=>s.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))).join(' › ')}</div>`;
 const IMGS=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17];
 const bno=b=>parseInt(b.n);
-const bsrc=(b,t)=>IMGS.includes(bno(b))?`images/${String(bno(b)).padStart(2,'0')}${t?'-t':''}.jpg`:'images/glass.svg';
+const PNGS=[4,5];
+const bsrc=(b,t)=>IMGS.includes(bno(b))?`images/${String(bno(b)).padStart(2,'0')}${t?'-t':''}.${PNGS.includes(bno(b))?'png':'jpg'}`:'images/glass.svg';
 const bimg=b=>`<div class="bimg"><img src="${bsrc(b)}" alt="${b.n.replace(/"/g,'')}" loading="lazy" decoding="async"></div>`;
