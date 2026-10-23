@@ -81,7 +81,8 @@ function move(id){const s=ALL.find(x=>x.id==id);
  cd.innerHTML=`<div class="c"><h2>Премести ${lbl(s)}</h2><p>Към:</p><select id="to">${ALL.filter(x=>x.id!=id).map(x=>`<option value="${x.id}">${lbl(x)}${O[x.id]?' (отворена – ще се обедини)':''}</option>`).join('')}</select><div class="acts" style="margin-top:12px"><button class="pay" id="ok">Премести</button><button id="bk">Назад</button></div></div>`;
  cd.querySelector('#bk').onclick=()=>panel(id);
  cd.querySelector('#ok').onclick=()=>{const to=cd.querySelector('#to').value,a=O[id];if(O[to]){O[to].items.push(...a.items);O[to].opened=Math.min(O[to].opened,a.opened)}else O[to]=a;delete O[id];save();toast('Преместено към '+lbl(ALL.find(x=>x.id==to)));panel(to)}}
-document.getElementById('hist').onclick=()=>{const d0=new Date();d0.setHours(0,0,0,0);const h=Hs.filter(x=>x.closed>=d0).reverse();let g=0;h.forEach(x=>g+=x.total);
- cd.innerHTML=`<div class="c"><h2>История – днес</h2><div class="tot">Общо: ${fm(g)} · ${h.length} поръчки</div>${h.map(x=>`<details class="hl"><summary>${tm(x.closed)} · ${e(x.lb)} · ${fm(x.total)}${x.unp?' + —':''}</summary>${x.items.map(l=>`<div>${l.q}× ${e(l.n)} ${e(l.v)} – ${l.p==null?'—':fm(l.p*l.q)}</div>`).join('')}</details>`).join('')||'<p>Няма приключени поръчки днес.</p>'}<div class="acts" style="margin-top:12px"><button id="bk">Затвори</button></div></div>`;
- cd.hidden=false;cd.querySelector('#bk').onclick=close};
+const showHist=()=>{const d0=new Date();d0.setHours(0,0,0,0);const h=Hs.filter(x=>x.closed>=d0).reverse();let g=0;h.forEach(x=>g+=x.total);
+ cd.innerHTML=`<div class="c"><h2>История – днес</h2><div class="tot">Общо: ${fm(g)} · ${h.length} поръчки</div>${h.map(x=>`<details class="hl"><summary>${tm(x.closed)} · ${e(x.lb)} · ${fm(x.total)}${x.unp?' + —':''}</summary>${x.items.map(l=>`<div>${l.q}× ${e(l.n)} ${e(l.v)} – ${l.p==null?'—':fm(l.p*l.q)}</div>`).join('')}</details>`).join('')||'<p>Няма приключени поръчки днес.</p>'}<div class="acts" style="margin-top:12px"><button id="hdel" class="hdel">Изтрий историята</button><button id="bk">Затвори</button></div></div>`;
+ cd.hidden=false;cd.querySelector('#bk').onclick=close;cd.querySelector('#hdel').onclick=()=>{if(!confirm('Да изтрия ли цялата история на поръчките?'))return;Hs=[];save();showHist()}};
+document.getElementById('hist').onclick=showHist;
 addEventListener('resize',draw);draw();

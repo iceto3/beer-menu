@@ -21,3 +21,4 @@ select{font-size:16px;padding:10px;border-radius:8px;background:#0f0d0b;color:#f
 .hl{border-bottom:1px solid #3a302a;padding:8px 0}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--amber);color:#1d1208;padding:10px 16px;border-radius:10px;font:700 1em Oswald,sans-serif;z-index:30}
 .st text.tb{fill:#1d1208;stroke:none;font-size:6.5px}
+.hdel{background:#b3261e!important;color:#fff!important;border-color:#7a1712!important}
