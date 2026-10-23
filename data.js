@@ -35,6 +35,6 @@ const BITN={g:'ниска',y:'средна',r:'висока'},BITC={g:'#2e9e3e',
 const FAM={"Sierra Nevada Pale Ale":1,"Blanche de Namur":1};
 (function f(x){(x.b||[]).forEach(b=>{b.fam=!!FAM[b.n.replace(/^\d+\. /,'')]});(x.k||[]).forEach(f)})(TREE);
 const dot=b=>b.fam?`<span class="bang ${b.bit}" title="${b.bit=='r'?'известна с горчивината си':'известна с липсата на горчивина'}">!</span>`:`<span class="dot ${b.bit}" title="горчивина: ${BITN[b.bit]}"></span>`;
-const FL={"Weihenstephaner Hefeweissbier":"🍌🧂🍞","O'Hara's Irish Stout":"☕","O'Hara's 51st State IPA":"🍍🍊🍑🍋","Carlsberg":"🍋🌸","Britos Hoppy Blond":"🍊🌸🌿","Schöfferhofer Hefeweizen":"🍌🧂🍞","Glarus Premium Pale Ale":"🍋","Leffe Brune":"🍮☕","Sierra Nevada Pale Ale":"🌲🍋🍮","Ichnusa":"🍞","Corona Extra":"🍑🍊"};
+const FL={"Weihenstephaner Hefeweissbier":"🍌🌶️🍞","O'Hara's Irish Stout":"☕","O'Hara's 51st State IPA":"🍍🍊🍑🍋","Carlsberg":"🍋🌸","Britos Hoppy Blond":"🍊🌸🌿","Schöfferhofer Hefeweizen":"🍌🌶️🍞","Glarus Premium Pale Ale":"🍋","Leffe Brune":"🍮☕","Sierra Nevada Pale Ale":"🌲🍋🍮","Ichnusa":"🍞","Corona Extra":"🍑🍊"};
 (function f(x){(x.b||[]).forEach(b=>{b.fl=FL[b.n.replace(/^\d+\. /,'')]||''});(x.k||[]).forEach(f)})(TREE);
-const FLEG="🍊 портокал/мандарина · 🍋 лимон/цитрус · 🍌 банан · 🍐 круша · 🍏 ябълка · 🍑 костилкови · 🍍 тропически · 🍇 сушени плодове · ☕ кафе/печено · 🍫 шоколад · 🍞 хляб/малц · 🍯 мед · 🍮 карамел · 🌲 бор · 🌸 цветя · 🌿 билки/трева · 🧂 карамфил/подправки";
+const FLEG="🍊 портокал/мандарина · 🍋 лимон/цитрус · 🍌 банан · 🍐 круша · 🍏 ябълка · 🍑 костилкови · 🍍 тропически · 🍇 сушени плодове · ☕ кафе/печено · 🍫 шоколад · 🍞 хляб/малц · 🍯 мед · 🍮 карамел · 🌲 бор · 🌸 цветя · 🌿 билки/трева · 🌶️ подправки (карамфил)";
