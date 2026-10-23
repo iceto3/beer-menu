@@ -6,3 +6,4 @@ ul{list-style:none;margin:0;padding-left:16px}#tree>ul{padding:8px}li{margin:2px
 .e{opacity:.4}.e::after{content:" (няма в менюто)";font-size:.8em}.beer{background:#2a251e;margin:4px 0}.beer small{color:#d9b65d}
 #card{position:fixed;inset:0;background:#000a;display:flex;align-items:flex-end}#card[hidden]{display:none}
 .c{background:#f4ead5;color:#1d1a16;width:100%;padding:20px;border-radius:16px 16px 0 0;box-sizing:border-box}.c h2{margin-top:0}.cav{background:#ffe08a;padding:8px;border-radius:6px}button{padding:10px 20px;border:0;border-radius:8px;background:#b8860b;font-size:1em}
+.mapbtn{display:block;margin:10px 14px;padding:12px;text-align:center;background:#b8860b;color:#1d1a16;border-radius:10px;font-weight:700;text-decoration:none}
