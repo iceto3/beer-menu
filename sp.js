@@ -1,0 +1,8 @@
+const e=s=>String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])),cd=document.getElementById('card');
+function spcard(x){const s=x.sec;cd.innerHTML=`<div class="c">${x.path?crumb(x.path):''}<div class="bimg"><img src="${spsrc(x)}" alt=""></div><h2>${x.no}. ${e(x.n)}</h2><p><b>Вид:</b> ${e(x.t||'—')}<br><b>Произход:</b> ${e(x.c||'—')}<br><b>Алкохол:</b> ${x.abv?e(x.abv):'—'}${s.vol?`<br><b>Доза:</b> ${e(s.vol)}`:''}</p>${x.d?`<p>${e(x.d)}</p>`:''}${x.cav?`<p class="cav">⚠️ ${e(x.cav)}</p>`:''}<button>Затвори</button></div>`;cd.hidden=false;cd.querySelector('button').onclick=()=>cd.hidden=true}
+cd.onclick=ev=>{if(ev.target===cd)cd.hidden=true};
+if(document.body.dataset.s){const s=SP.find(x=>x.id===document.body.dataset.s),M=document.getElementById('menu');
+ document.querySelector('header').textContent=s.ic+' '+s.t;document.title=s.t;
+ if(s.vol){const v=document.createElement('p');v.className='lgw';v.textContent='Доза: '+s.vol;M.before(v)}
+ s.it.forEach((x,i)=>{if(s.grp&&s.grp[i]!=null){const h=document.createElement('h3');h.className='sec';h.textContent=s.grp[i];M.append(h)}
+  const r=document.createElement('div');r.className='mrow';r.innerHTML=`<div class="mt"><div class="mn">${x.no}. ${e(x.n)}</div><div class="crumb">${e(x.t)}${x.c?' · '+e(x.c):''}</div></div><img class="th" src="${spsrc(x)}" alt="" loading="lazy" decoding="async">`;r.onclick=()=>spcard(x);M.append(r)})}
