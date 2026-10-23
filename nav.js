@@ -2,7 +2,7 @@ const SPN=[['gin','Джин','🍸'],['tequila','Текила','🌵'],['anisett
 (function(){const p=location.pathname,f=p.split('/').pop().replace('.html',''),cur=f==''||f=='index'?'menu':f=='tree'?'list':f;
 const b=document.createElement('button');b.id='hb';b.textContent='☰';b.setAttribute('aria-label','Меню');
 const m=document.createElement('nav');m.id='hm';m.hidden=true;
-const L=[['Бири'],['./','🍺 Бири (меню)','menu'],['Спиртни']].concat(SPN.map(s=>[s[0]+'.html',s[2]+' '+s[1],s[0]])).concat([['Поръчки'],['salon.html','🪑 Салон (поръчки)','salon'],['Схеми'],['wmap.html','🥃 Карта на уискитата','wmap'],['map.html','🗺️ Карта на схемата','map'],['tree.html','📋 Списък (схема)','list']]);
+const L=[['Поръчки'],['salon.html','🪑 Салон (поръчки)','salon'],['Бири'],['./','🍺 Бири (меню)','menu'],['Спиртни']].concat(SPN.map(s=>[s[0]+'.html',s[2]+' '+s[1],s[0]])).concat([['Схеми'],['wmap.html','🥃 Карта на уискитата','wmap'],['map.html','🗺️ Карта на схемата','map'],['tree.html','📋 Списък (схема)','list']]);
 m.innerHTML=L.map(x=>x.length==1?`<div class="nh">${x[0]}</div>`:`<a href="${x[0]}" class="${cur==x[2]?'cur':''}">${x[1]}</a>`).join('');
 b.onclick=e=>{e.stopPropagation();m.hidden=!m.hidden};document.addEventListener('click',e=>{if(!m.contains(e.target))m.hidden=true});
 document.body.append(b,m);
