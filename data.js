@@ -28,11 +28,13 @@ const TREE={n:"Бира",d:"Всички бири в менюто, подред�
  {n:"Тъмен лагер",d:"Тъмен, лек печен малц.",k:[]}]}]};
 const ORDER=["Krombacher Pils","Weihenstephaner Hefeweissbier","O'Hara's Irish Stout","O'Hara's 51st State IPA","Carlsberg","Britos Hoppy Blond","Bakalář Světlý Ležák","Schöfferhofer Hefeweizen","Glarus Premium Pale Ale","Blanche de Namur","Leffe Brune","Sierra Nevada Pale Ale","Kirin Ichiban","Ichnusa","Corona Extra","Duvel","Krombacher Pils безалкохолна"];
 (function num(x){(x.b||[]).forEach(b=>{const i=ORDER.indexOf(b.n);if(i<0)throw b.n;b.n=(i+1)+'. '+b.n});(x.k||[]).forEach(num)})(TREE);
-const LEGEND='<span class="lg"><i class="sw bt"></i>бутилка <i class="sw dr"></i>наливна <span class="lgb">горчивина: <span class="dot g"></span>ниска <span class="dot y"></span>средна <span class="dot r"></span>висока</span></span>';
+const LEGEND='<span class="lg"><i class="sw bt"></i>бутилка <i class="sw dr"></i>наливна <span class="lgb">горчивина: <span class="dot g"></span>ниска <span class="dot y"></span>средна <span class="dot r"></span>висока <span class="bang r">!</span>известна с горчивината си <span class="bang g">!</span>известна с липсата на горчивина</span></span>';
 const BIT={"Krombacher Pils":[23,'y'],"Weihenstephaner Hefeweissbier":[14,'g'],"O'Hara's Irish Stout":[36,'r'],"O'Hara's 51st State IPA":[40,'r'],"Carlsberg":['~20–22 (по ревюта)','y'],"Britos Hoppy Blond":[12,'g'],"Bakalář Světlý Ležák":[30,'y'],"Schöfferhofer Hefeweizen":['14–20','g'],"Glarus Premium Pale Ale":[null,'y'],"Blanche de Namur":[null,'g'],"Leffe Brune":[null,'g'],"Sierra Nevada Pale Ale":[38,'r'],"Kirin Ichiban":[21,'y'],"Ichnusa":[null,'y'],"Corona Extra":[null,'g'],"Duvel":['~32','y'],"Krombacher Pils безалкохолна":['19–22','y']};
 (function f(x){(x.b||[]).forEach(b=>{const k=b.n.replace(/^\d+\. /,'');[b.ibu,b.bit]=BIT[k]});(x.k||[]).forEach(f)})(TREE);
 const BITN={g:'ниска',y:'средна',r:'висока'},BITC={g:'#2e9e3e',y:'#e8c21a',r:'#d0342c'};
-const dot=b=>`<span class="dot ${b.bit}" title="горчивина: ${BITN[b.bit]}"></span>`;
+const FAM={"Sierra Nevada Pale Ale":1,"Blanche de Namur":1};
+(function f(x){(x.b||[]).forEach(b=>{b.fam=!!FAM[b.n.replace(/^\d+\. /,'')]});(x.k||[]).forEach(f)})(TREE);
+const dot=b=>b.fam?`<span class="bang ${b.bit}" title="${b.bit=='r'?'известна с горчивината си':'известна с липсата на горчивина'}">!</span>`:`<span class="dot ${b.bit}" title="горчивина: ${BITN[b.bit]}"></span>`;
 const FL={"Weihenstephaner Hefeweissbier":"🍌🧂🍞","O'Hara's Irish Stout":"☕","O'Hara's 51st State IPA":"🍍🍊🍑🍋","Carlsberg":"🍋🌸","Britos Hoppy Blond":"🍊🌸🌿","Schöfferhofer Hefeweizen":"🍌🧂🍞","Glarus Premium Pale Ale":"🍋","Leffe Brune":"🍮☕","Sierra Nevada Pale Ale":"🌲🍋🍮","Ichnusa":"🍞","Corona Extra":"🍑🍊"};
 (function f(x){(x.b||[]).forEach(b=>{b.fl=FL[b.n.replace(/^\d+\. /,'')]||''});(x.k||[]).forEach(f)})(TREE);
 const FLEG="🍊 портокал/мандарина · 🍋 лимон/цитрус · 🍌 банан · 🍐 круша · 🍏 ябълка · 🍑 костилкови · 🍍 тропически · 🍇 сушени плодове · ☕ кафе/печено · 🍫 шоколад · 🍞 хляб/малц · 🍯 мед · 🍮 карамел · 🌲 бор · 🌸 цветя · 🌿 билки/трева · 🧂 карамфил/подправки";
