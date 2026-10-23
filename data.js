@@ -26,3 +26,6 @@ const TREE={n:"Бира",d:"Всички бири в менюто, подред�
  {n:"Мерцен / Октоберфест",d:"Кехлибарен, малцов, карамелен.",k:[]},
  {n:"Бок",d:"Силен, малцов немски лагер.",k:[]},
  {n:"Тъмен лагер",d:"Тъмен, лек печен малц.",k:[]}]}]};
+const ORDER=["Krombacher Pils","Weihenstephaner Hefeweissbier","O'Hara's Irish Stout","O'Hara's 51st State IPA","Carlsberg","Britos Hoppy Blond","Bakalář Světlý Ležák","Schöfferhofer Hefeweizen","Glarus Premium Pale Ale","Blanche de Namur","Leffe Brune","Sierra Nevada Pale Ale","Kirin Ichiban","Ichnusa","Corona Extra","Duvel","Krombacher Pils безалкохолна"];
+(function num(x){(x.b||[]).forEach(b=>{const i=ORDER.indexOf(b.n);if(i<0)throw b.n;b.n=(i+1)+'. '+b.n});(x.k||[]).forEach(num)})(TREE);
+const LEGEND='<span class="lg"><i class="sw bt"></i>бутилка <i class="sw dr"></i>наливна (н)</span>';

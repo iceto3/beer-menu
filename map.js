@@ -8,7 +8,7 @@ let nx=0;function lay(n,dp){n.y=dp*(H+GY);if(!n.c.length){n.x=nx;nx+=W+GX}else{n
 const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);(p||vp).append(e);return e};
 function lines(s){const w=s.split(' '),o=[''];w.forEach(x=>{if((o[o.length-1]+' '+x).length>20&&o[o.length-1])o.push(x);else o[o.length-1]=(o[o.length-1]+' '+x).trim()});return o.slice(0,2)}
 function draw(n){n.c.forEach(c=>{const my=n.y+H+GY/2;el('path',{d:`M${n.x+W/2},${n.y+H} V${my} H${c.x+W/2} V${c.y}`});draw(c)});
- const g=el('g',{class:'nd'+(n.beer?' b':'')+(n.empty&&!n.beer?' e':'')+(n.root?' r':''),transform:`translate(${n.x},${n.y})`});
+ const g=el('g',{class:'nd'+(n.beer?' b':'')+(n.beer&&n.beer.srv.startsWith('Наливна')?' d':'')+(n.empty&&!n.beer?' e':'')+(n.root?' r':''),transform:`translate(${n.x},${n.y})`});
  el('rect',{width:W,height:H,rx:8},g);const L=lines(n.label);L.forEach((t,i)=>{el('text',{x:W/2,y:H/2+(i-(L.length-1)/2)*15+4,'text-anchor':'middle'},g).textContent=t});
  g.dataset.id=all.push(n)-1}
 const all=[];draw(root);
@@ -34,3 +34,4 @@ const up=ev=>{const was=P.size;P.delete(ev.pointerId);if(P.size<2)pd=0;if(was!=1
  if(g){const n=all[g.dataset.id];setTimeout(()=>{if(lastTap===now)show(n)},300)}};
 svg.addEventListener('pointerup',up);svg.addEventListener('pointercancel',ev=>{P.delete(ev.pointerId);pd=0});
 svg.addEventListener('dblclick',ev=>ev.preventDefault());document.addEventListener('gesturestart',ev=>ev.preventDefault());
+document.getElementById('lgm').outerHTML=LEGEND;
