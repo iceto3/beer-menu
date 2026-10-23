@@ -17,3 +17,4 @@ details{font-size:.85em;margin-top:4px}summary{cursor:pointer;font-weight:700}
 #fleg{position:fixed;left:10px;bottom:12px;z-index:2;max-width:min(320px,70vw);background:#2a251e;color:#f4ead5;padding:8px 10px;border-radius:10px;line-height:1.6}
 .bang{display:inline-block;font-weight:900;font-size:1.15em;margin:0 3px;-webkit-text-stroke:1px #fff;paint-order:stroke fill;text-shadow:0 0 2px #fff}.bang.r{color:#d0342c}.bang.g{color:#2e9e3e}
 .clove{display:inline-block;vertical-align:middle}.fo{font-size:12px;text-align:center;line-height:16px;pointer-events:none}
+.crumb{font-size:13px;color:#6b6458;margin-bottom:6px;line-height:1.35;overflow-wrap:anywhere}#desc .crumb{color:#b9ad97;margin-bottom:2px}
