@@ -44,3 +44,12 @@ main{padding-bottom:20px}
 .rec{margin:12px 0;border:1px solid #aeb6bd;border-radius:10px;background:var(--grain),#1d1916;padding:4px 12px;font-size:1em}.rec summary{padding:10px 0;font-size:1.1em}
 .rec table{width:100%;border-collapse:collapse}.rec td{padding:7px 4px;border-bottom:1px solid #3a302a}.rec td+td{text-align:right;color:var(--amber);font-family:Oswald,sans-serif;white-space:nowrap}
 .rec ol{padding-left:22px;line-height:1.5}.rec li::marker{color:var(--ember);font-family:Oswald,sans-serif}
+.hlogo{display:inline-block;vertical-align:middle;margin:-6px 8px -6px -4px}.hlogo img{width:34px;height:34px;display:block;filter:drop-shadow(0 0 4px #ffb04a88)}
+.cv{min-height:100vh;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;padding:56px 20px 32px;text-align:center}
+.cvlogo{width:min(78vw,340px);height:auto;filter:drop-shadow(0 0 18px #ff9a2a55)}
+.cvt{margin:14px 0 2px;font:700 2.4em/1.1 Oswald,sans-serif;text-transform:uppercase;letter-spacing:.1em;color:var(--amber);text-shadow:0 0 10px #ff9a2a99,0 0 24px #ff7a1a55}
+.cvs{margin:0 0 26px;font:400 1em Oswald,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#cdbb9a}
+.cvb{display:flex;flex-direction:column;gap:12px;width:min(100%,380px)}
+.cvb>a,.cvb>button{display:block;padding:16px;border-radius:12px;font:700 1.3em Oswald,sans-serif;text-transform:uppercase;letter-spacing:.06em;text-decoration:none;color:#2a1a0c;cursor:pointer;border:2px solid #7a4a1c;background:linear-gradient(180deg,#f2c27a,#d9963f);box-shadow:inset 0 1px 0 #fff6,0 4px 10px #000a}
+.cvspl{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cvspl[hidden]{display:none}
+.cvspl a{padding:10px 8px;border-radius:9px;text-decoration:none;color:#f1e4cc;background:#0006;border:1px solid #c8893a88;font-size:.95em}
