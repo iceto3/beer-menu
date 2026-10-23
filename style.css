@@ -7,3 +7,6 @@ ul{list-style:none;margin:0;padding-left:16px}#tree>ul{padding:8px}li{margin:2px
 #card{position:fixed;inset:0;background:#000a;display:flex;align-items:flex-end}#card[hidden]{display:none}
 .c{background:#f4ead5;color:#1d1a16;width:100%;padding:20px;border-radius:16px 16px 0 0;box-sizing:border-box}.c h2{margin-top:0}.cav{background:#ffe08a;padding:8px;border-radius:6px}button{padding:10px 20px;border:0;border-radius:8px;background:#b8860b;font-size:1em}
 .mapbtn{display:block;margin:10px 14px;padding:12px;text-align:center;background:#b8860b;color:#1d1a16;border-radius:10px;font-weight:700;text-decoration:none}
+#hb{position:fixed;top:6px;right:8px;z-index:10;width:44px;height:40px;font-size:1.4em;padding:0;background:#1d1a16;color:#f4ead5}
+#hm{position:fixed;top:52px;right:8px;z-index:10;background:#2a251e;border-radius:10px;box-shadow:0 4px 16px #0008;overflow:hidden;min-width:220px}#hm[hidden]{display:none}
+#hm a{display:block;padding:14px 16px;color:#f4ead5;text-decoration:none;border-bottom:1px solid #3a3228}#hm a.cur{background:#b8860b;color:#1d1a16;font-weight:700}

@@ -8,4 +8,4 @@ function card(b,st){const c=document.getElementById('card');const e=s=>s.replace
  c.innerHTML=`<div class="c"><h2>${e(b.n)}</h2><p><b>Държава:</b> ${e(b.c)}<br><b>Стил:</b> ${e(st)}<br><b>Алкохол:</b> ${b.abv?e(b.abv):'—'}<br><b>Сервиране:</b> ${e(b.srv)}</p><p>${e(b.notes)}</p>${b.cav?`<p class="cav">⚠️ ${e(b.cav)}</p>`:''}<button>Затвори</button></div>`;c.hidden=false;c.querySelector('button').onclick=()=>c.hidden=true}
 document.getElementById('card').onclick=e=>{if(e.target.id==='card')e.target.hidden=true};
 const r=document.createElement('ul'),root=node(TREE,[]);root.classList.add('open');r.append(root);document.getElementById('tree').append(r);
-if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');
+
