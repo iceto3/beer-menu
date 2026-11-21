@@ -69,11 +69,14 @@ function add(id,it){const o=O[id]||(O[id]={items:[],opened:Date.now()});if(!o.it
  const l=o.items.find(l=>l.n==it.n&&l.v==it.v&&l.p==it.p);if(l){l.q++;l.ts=Date.now()}else o.items.push({n:it.n,v:it.v,p:it.p,q:1,ts:Date.now()});save()}
 function picker(id){const s=ALL.find(x=>x.id==id);
  cd.innerHTML=`<div class="c"><h2>Добави · ${lbl(s)}</h2><input id="q" type="search" placeholder="Търси напитка…" autocomplete="off"><div class="pg" id="pl"></div><div class="acts" style="position:sticky;bottom:0;background:#15120f;padding-top:8px"><button class="pay" id="dn">Готово</button></div></div>`;
- const pl=cd.querySelector('#pl'),q=cd.querySelector('#q');
+ const pl=cd.querySelector('#pl'),q=cd.querySelector('#q'),open=new Set();let prev='',auto=new Set();
  const qty=it=>{const l=(O[id]||{items:[]}).items.find(l=>l.n==it.n&&l.v==it.v&&l.p==it.p);return l?l.q:0};
- function render(){const f=q.value.trim().toLowerCase();let k=0;
+ function render(){const f=q.value.trim().toLowerCase();
+  if(f!==prev){prev=f;auto=new Set();if(f)CAT.forEach((g,gi)=>{if(g.it.some(it=>it.n.toLowerCase().includes(f)||(it.st||'').toLowerCase().includes(f)||g.t.toLowerCase().includes(f)))auto.add(gi)})}
   pl.innerHTML=CAT.map((g,gi)=>{const its=g.it.map((it,ii)=>[it,ii]).filter(([it])=>!f||it.n.toLowerCase().includes(f)||(it.st||'').toLowerCase().includes(f)||g.t.toLowerCase().includes(f));if(!its.length)return'';
-   return `<h3>${e(g.t)}</h3>`+its.map(([it,ii])=>{const n=qty(it);return `<div class="pi"><div class="ln">${e(it.n)}${bm(it.n)}<small style="display:block;color:#bfae92">${it.st?`<span style="color:#9a9a9a">${e(it.st)}</span> · `:''}${e(it.v)}</small></div><span class="pr">${fm(it.p)}</span>${n?`<button class="qb" data-g="${gi}" data-i="${ii}" data-a="-">−</button><span class="qn">${n}</span><button class="qb" data-g="${gi}" data-i="${ii}" data-a="+">+</button>`:`<button class="ad" data-g="${gi}" data-i="${ii}" data-a="+">＋</button>`}</div>`}).join('')}).join('')||'<p>Няма резултати.</p>';
+   const on=open.has(gi)||auto.has(gi);
+   return `<h3 class="ph" data-g="${gi}" role="button" aria-expanded="${on}"><span class="ar">${on?'▾':'▸'}</span> ${e(g.t)} <span class="pc">${its.length}</span></h3>`+(on?its.map(([it,ii])=>{const n=qty(it);return `<div class="pi"><div class="ln">${e(it.n)}${bm(it.n)}<small style="display:block;color:#bfae92">${it.st?`<span style="color:#9a9a9a">${e(it.st)}</span> · `:''}${e(it.v)}</small></div><span class="pr">${fm(it.p)}</span>${n?`<button class="qb" data-g="${gi}" data-i="${ii}" data-a="-">−</button><span class="qn">${n}</span><button class="qb" data-g="${gi}" data-i="${ii}" data-a="+">+</button>`:`<button class="ad" data-g="${gi}" data-i="${ii}" data-a="+">＋</button>`}</div>`}).join(''):'')}).join('')||'<p>Няма резултати.</p>';
+  pl.querySelectorAll('h3.ph').forEach(h=>h.onclick=()=>{const gi=+h.dataset.g,on=open.has(gi)||auto.has(gi);on?(open.delete(gi),auto.delete(gi)):open.add(gi);render()});
   pl.querySelectorAll('button').forEach(b=>b.onclick=()=>{const it=CAT[b.dataset.g].it[b.dataset.i];
    if(b.dataset.a=='+')add(id,it);else{const o=O[id],l=o.items.find(l=>l.n==it.n&&l.v==it.v&&l.p==it.p);if(--l.q<1)o.items.splice(o.items.indexOf(l),1);if(!o.items.length)delete O[id];save()}render()})}
  q.oninput=render;render();cd.querySelector('#dn').onclick=()=>panel(id);cd.hidden=false}

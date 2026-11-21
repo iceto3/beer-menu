@@ -14,7 +14,9 @@
 .tot{font:700 1.4em Oswald,sans-serif;color:var(--amber);text-align:right;margin:10px 0}
 .acts{display:flex;flex-wrap:wrap;gap:8px}.acts button{flex:1 1 40%;min-height:50px}.acts .pay{background:linear-gradient(180deg,#f0b65c,var(--honey2))}
 #q{width:100%;box-sizing:border-box;padding:12px;font-size:16px;border-radius:8px;border:1px solid #5d656c;background:#0f0d0b;color:#f1e4cc;margin:6px 0}
-.pg h3{font:700 1em Oswald,sans-serif;text-transform:uppercase;color:var(--honey);margin:14px 0 4px;letter-spacing:.05em}
+.pg h3.ph{display:flex;align-items:center;gap:8px;font:700 1em Oswald,sans-serif;text-transform:uppercase;color:var(--honey);margin:6px 0 0;padding:10px 8px;min-height:44px;box-sizing:border-box;letter-spacing:.05em;cursor:pointer;user-select:none;border-radius:8px;background:#1f1a16}
+.pg h3.ph .ar{width:1.1em;flex:none}
+.pg h3.ph .pc{margin-left:auto;font-size:.85em;color:#bfae92;letter-spacing:0;font-variant-numeric:tabular-nums}
 .pi{display:flex;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid #2c2520}.pi .ln{flex:1}.pi .pr{color:#e9c48a;font-family:Oswald,sans-serif}
 .pi .ad{min-height:44px;min-width:56px;padding:0 10px}
 select{font-size:16px;padding:10px;border-radius:8px;background:#0f0d0b;color:#f1e4cc;border:1px solid #5d656c}
