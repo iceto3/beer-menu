@@ -18,7 +18,7 @@ const BMAP={};(function w(x){(x.b||[]).forEach(b=>BMAP[b.n]=b);(x.k||[]).forEach
 const CAT=[];const BL=[];(function w(x){(x.b||[]).forEach(b=>BL.push({n:b.n,v:b.srv||'',p:null,st:x.n}));(x.k||[]).forEach(w)})(TREE);
 BL.sort((a,b)=>parseInt(a.n)-parseInt(b.n));
 CAT.push({t:'🍺 Наливни',it:BL.filter(b=>parseInt(b.n)<=4)},{t:'🍾 Бутилирани',it:BL.filter(b=>parseInt(b.n)>=5)});
-SP.forEach(s=>CAT.push({t:s.ic+' '+s.t,it:s.it.flatMap(x=>{const vol=s.vol||'';if(!x.p)return[{n:x.n,v:vol,p:null}];
+SP.forEach(s=>CAT.push({t:s.ic+' '+s.t,it:s.it.flatMap(x=>{const vol=x.vol||s.vol||'';if(!x.p)return[{n:x.n,v:vol,p:null}];
  return x.p.split('/').map(t=>t.trim()).map(t=>{const m=t.match(/^(\d+)\s*[×x]\s*([\d.]+)$/);return m?{n:x.n,v:m[1]+' бр.',p:+m[2]}:{n:x.n,v:vol,p:isNaN(+t)?null:+t}})})}));
 // съхранение
 const LS=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(_){return null}};
